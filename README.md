@@ -4,14 +4,21 @@ Utility functions for manipulating YYYYMMDD datekeys
 Does your backend use datekeys which follow this pattern: YYYYMMDD?
 `datekey-helper` makes transforming those datekeys into formatted (display) dates really easy!
 
-Example:
+Installation:
+`npm i -S datekey-helper`
+
+Usage:
 ```
+const DatekeyHelper = require('datekey-helper')
+
 const datekey = 20170918 // a Monday
 const datekeyHelper = new DatekeyHelper(datekey)
 
-console.log(datekeyHelper.today('long'))
-
+console.log(datekeyHelper.display.long)
 // => 09/18/2017
+
+console.log(datekeyHelper.display.short)
+// => 09/18
 ```
 
 Week-endings:
