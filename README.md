@@ -32,3 +32,11 @@ console.log(datekey.weekEndings(4))
 console.log(datekey.weekEndings(-4))
 // => [20170916, 20170909, 20170902, 20170826] (last 4 Saturdays)
 ```
+
+Separator:
+```
+const datekey2 = new DatekeyHelper(key, { separator: '-' })
+
+console.log(datekey.display.long)
+// => 09-18-2017
+```
