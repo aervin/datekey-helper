@@ -2,7 +2,7 @@
 Utility functions for manipulating YYYYMMDD datekeys
 
 Does your backend use datekeys which follow this pattern: YYYYMMDD?
-`datekey-helper` makes transforming those datekeys into formatted (display) dates.
+`datekey-helper` makes transforming those datekeys into formatted (display) dates really easy!
 
 Example:
 ```
