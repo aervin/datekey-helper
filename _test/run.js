@@ -61,3 +61,27 @@ try {
     logPassFail(false, testCount, actual, expected)
     process.exit(1)
 }
+
+// [5]
+testCount++
+expected = false
+actual = datekey.isMonday
+try {
+    assert.deepEqual(actual, expected)
+    logPassFail(true, testCount, actual, expected)
+} catch (e) {
+    logPassFail(false, testCount, actual, expected)
+    process.exit(1)
+}
+
+// [6]
+testCount++
+expected = true
+actual = datekey.isSunday
+try {
+    assert.deepEqual(actual, expected)
+    logPassFail(true, testCount, actual, expected)
+} catch (e) {
+    logPassFail(false, testCount, actual, expected)
+    process.exit(1)
+}

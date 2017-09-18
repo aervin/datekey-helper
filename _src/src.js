@@ -18,6 +18,11 @@ function DatekeyHelper(datekey, config) {
 
     _this.date = new Date(_this.display.long)
     _this.isSaturday = _this.date.getDay() === 6
+    _this.isFriday = _this.date.getDay() === 5
+    _this.isThursday = _this.date.getDay() === 4
+    _this.isWednesday = _this.date.getDay() === 3
+    _this.isTuesday = _this.date.getDay() === 2
+    _this.isMonday = _this.date.getDay() === 1
     _this.isSunday = _this.date.getDay() === 0
 
     _this.weekEndings = function(n) {
