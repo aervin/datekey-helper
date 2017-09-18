@@ -85,3 +85,56 @@ try {
     logPassFail(false, testCount, actual, expected)
     process.exit(1)
 }
+
+
+const datekey2 = new DatekeyHelper(20170917, { separator: '-' })
+
+// [7]
+testCount++
+expected = '09-17-2017'
+actual = datekey2.display.long
+try {
+    assert.deepEqual(actual, expected)
+    logPassFail(true, testCount, actual, expected)
+} catch (e) {
+    logPassFail(false, testCount, actual, expected)
+    process.exit(1)
+}
+
+// [8]
+testCount++
+expected = '09-17'
+actual = datekey2.display.short
+try {
+    assert.deepEqual(actual, expected)
+    logPassFail(true, testCount, actual, expected)
+} catch (e) {
+    logPassFail(false, testCount, actual, expected)
+    process.exit(1)
+}
+
+const datekey3 = new DatekeyHelper(20170917, { separator: '.' })
+
+// [9]
+testCount++
+expected = '09.17.2017'
+actual = datekey3.display.long
+try {
+    assert.deepEqual(actual, expected)
+    logPassFail(true, testCount, actual, expected)
+} catch (e) {
+    logPassFail(false, testCount, actual, expected)
+    process.exit(1)
+}
+
+// [10]
+testCount++
+expected = '09.17'
+actual = datekey3.display.short
+try {
+    assert.deepEqual(actual, expected)
+    logPassFail(true, testCount, actual, expected)
+} catch (e) {
+    logPassFail(false, testCount, actual, expected)
+    process.exit(1)
+}

@@ -11,9 +11,11 @@ function DatekeyHelper(datekey, config) {
         return _this
     }
 
+    _this.separator = _this.config ? (_this.config.separator || '/') : '/'
+
     _this.display = {
-        long: today(datekey, true),
-        short: today(datekey, false)
+        long: format(datekey, true, _this.separator),
+        short: format(datekey, false, _this.separator)
     }
 
     _this.date = new Date(_this.display.long)
@@ -65,13 +67,13 @@ function dateToDatekey(d) {
     var d = d.getDate() > 9 ? d.getDate() : `0` + d.getDate().toString()
     return parseInt(`${y}${m}${d}`)
 }
-function today(datekey, long) {
+function format(datekey, long, separator) {
     var a = datekey.toString().split('')
     var y = `${a[0]}${a[1]}${a[2]}${a[3]}`
     var m = `${a[4]}${a[5]}`
     var d = `${a[6]}${a[7]}`
-    var s = m + '/' + d
-    var l = m + '/' + d + '/' + y
+    var s = m + separator + d
+    var l = m + separator + d + separator + y
     return long ? l : s
 }
 function validateLength(d) {
