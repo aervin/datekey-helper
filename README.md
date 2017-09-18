@@ -11,7 +11,7 @@ Usage:
 ```
 const DatekeyHelper = require('datekey-helper')
 
-const key = 20170918
+const key = 20170918 // typeof === 'number'
 const datekey = new DatekeyHelper(key)
 
 console.log(datekey.isMonday)
