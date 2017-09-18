@@ -1,0 +1,27 @@
+{
+  "name": "datekey-helper",
+  "version": "1.0.0",
+  "description": "Utility functions for working with YYYYMMDD datekeys",
+  "main": "datekey-helper.js",
+  "scripts": {
+    "test": "node ./_test/run.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aervin/datekey-helper.git"
+  },
+  "keywords": [
+    "datekey",
+    "date",
+    "datetime",
+    "javascript",
+    "display"
+  ],
+  "author": "aaron.jeffrey.ervin@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aervin/datekey-helper/issues"
+  },
+  "homepage": "https://github.com/aervin/datekey-helper#readme",
+  "devDependencies": {}
+}
