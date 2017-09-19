@@ -1,44 +1,57 @@
 function DatekeyHelper(datekey, config) {
     var _this = this
-    _this.datekey = datekey || undefined
+    datekey = datekey || undefined
     _this.config = config || undefined
 
     if (
-        datekeyExists(_this.datekey) &&
-        validateType(_this.datekey) &&
-        validateLength(_this.datekey)
+        datekeyExists(datekey) &&
+        validateType(datekey) &&
+        validateLength(datekey)
     ) {
         return _this
     }
 
-    _this.separator = _this.config ? (_this.config.separator || '/') : '/'
-
+    var separator = '/'
     _this.display = {
-        long: format(datekey, true, _this.separator),
-        short: format(datekey, false, _this.separator)
+        long: function() {
+            return format(datekey, true, separator)
+        },
+        short: function() {
+            return format(datekey, false, separator)
+        }
     }
 
-    _this.date = new Date(_this.display.long)
-    _this.isSaturday = _this.date.getDay() === 6
-    _this.isFriday = _this.date.getDay() === 5
-    _this.isThursday = _this.date.getDay() === 4
-    _this.isWednesday = _this.date.getDay() === 3
-    _this.isTuesday = _this.date.getDay() === 2
-    _this.isMonday = _this.date.getDay() === 1
-    _this.isSunday = _this.date.getDay() === 0
+    var date = new Date(_this.display.long())
+    _this.isSaturday = date.getDay() === 6
+    _this.isFriday = date.getDay() === 5
+    _this.isThursday = date.getDay() === 4
+    _this.isWednesday = date.getDay() === 3
+    _this.isTuesday = date.getDay() === 2
+    _this.isMonday = date.getDay() === 1
+    _this.isSunday = date.getDay() === 0
+
+    _this.setSeparator = function(s) {
+        try {
+            separator =
+                typeof s === 'number' || typeof s === 'string' ? s : separator
+        } catch (e) {
+            return false
+        }
+        return true
+    }
 
     _this.weekEndings = function(n) {
         var endings = []
         if (n === 0 || n === undefined) {
             return endings
         }
-        var start = new Date(_this.display.long)
+        var start = new Date(_this.display.long())
         if (!_this.isSaturday) {
             if (n > 0) {
-                var offset = 6 - _this.date.getDay()
+                var offset = 6 - date.getDay()
                 start.setDate(start.getDate() + offset)
             } else {
-                start.setDate(start.getDate() - (_this.date.getDay() + 1))
+                start.setDate(start.getDate() - (date.getDay() + 1))
             }
         }
         for (var i = 0; i < Math.abs(n); i++) {

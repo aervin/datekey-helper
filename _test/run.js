@@ -11,13 +11,13 @@ const logPassFail = (passed, testCount, actual, expected) => {
     `)
 }
 
-const datekey = new DatekeyHelper(20170917)
+let datekey = new DatekeyHelper(20170917)
 let testCount, expected, actual
 
 // [1]
 testCount = 1
 expected = '09/17/2017'
-actual = datekey.display.long
+actual = datekey.display.long()
 try {
     assert.strictEqual(actual, expected)
     logPassFail(true, testCount, actual, expected)
@@ -29,7 +29,7 @@ try {
 // [2]
 testCount++
 expected = '09/17'
-actual = datekey.display.short
+actual = datekey.display.short()
 try {
     assert.strictEqual(actual, expected)
     logPassFail(true, testCount, actual, expected)
@@ -86,13 +86,12 @@ try {
     process.exit(1)
 }
 
-
-const datekey2 = new DatekeyHelper(20170917, { separator: '-' })
+datekey.setSeparator('-')
 
 // [7]
 testCount++
 expected = '09-17-2017'
-actual = datekey2.display.long
+actual = datekey.display.long()
 try {
     assert.deepEqual(actual, expected)
     logPassFail(true, testCount, actual, expected)
@@ -104,7 +103,7 @@ try {
 // [8]
 testCount++
 expected = '09-17'
-actual = datekey2.display.short
+actual = datekey.display.short()
 try {
     assert.deepEqual(actual, expected)
     logPassFail(true, testCount, actual, expected)
@@ -113,12 +112,12 @@ try {
     process.exit(1)
 }
 
-const datekey3 = new DatekeyHelper(20170917, { separator: '.' })
+datekey.setSeparator('.')
 
 // [9]
 testCount++
 expected = '09.17.2017'
-actual = datekey3.display.long
+actual = datekey.display.long()
 try {
     assert.deepEqual(actual, expected)
     logPassFail(true, testCount, actual, expected)
@@ -130,7 +129,23 @@ try {
 // [10]
 testCount++
 expected = '09.17'
-actual = datekey3.display.short
+actual = datekey.display.short()
+try {
+    assert.deepEqual(actual, expected)
+    logPassFail(true, testCount, actual, expected)
+} catch (e) {
+    logPassFail(false, testCount, actual, expected)
+    process.exit(1)
+}
+
+datekey.setSeparator(' \n.\n ')
+
+// [11]
+testCount++
+expected = `09 
+.
+ 17`
+actual = datekey.display.short()
 try {
     assert.deepEqual(actual, expected)
     logPassFail(true, testCount, actual, expected)
