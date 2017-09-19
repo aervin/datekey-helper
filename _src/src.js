@@ -11,14 +11,18 @@ function DatekeyHelper(datekey, config) {
         return _this
     }
 
-    _this.separator = _this.config ? _this.config.separator || '/' : '/'
+    var separator = _this.config ? _this.config.separator || '/' : '/'
 
     _this.display = {
-        long: format(datekey, true, _this.separator),
-        short: format(datekey, false, _this.separator)
+        long: function() {
+            return format(datekey, true, separator)
+        },
+        short: function() {
+            return format(datekey, false, separator)
+        }
     }
 
-    _this.date = new Date(_this.display.long)
+    _this.date = new Date(_this.display.long())
     _this.isSaturday = _this.date.getDay() === 6
     _this.isFriday = _this.date.getDay() === 5
     _this.isThursday = _this.date.getDay() === 4
@@ -27,12 +31,16 @@ function DatekeyHelper(datekey, config) {
     _this.isMonday = _this.date.getDay() === 1
     _this.isSunday = _this.date.getDay() === 0
 
+    _this.setSeparator = function(ch) {
+        separator =
+            typeof ch === 'number' || typeof ch === 'string' ? ch : separator
+    }
     _this.weekEndings = function(n) {
         var endings = []
         if (n === 0 || n === undefined) {
             return endings
         }
-        var start = new Date(_this.display.long)
+        var start = new Date(_this.display.long())
         if (!_this.isSaturday) {
             if (n > 0) {
                 var offset = 6 - _this.date.getDay()
@@ -53,9 +61,9 @@ function DatekeyHelper(datekey, config) {
 
 function datekeyExists(d) {
     if (d === undefined || d === null) {
-        throw new Error(`
-            Cannot instantiate DatekeyHelper. Was not passed a datekey.
-        `)
+        throw new Error(
+            'Cannot instantiate DatekeyHelper. Was not passed a datekey.'
+        )
     }
 }
 function dateToDatekey(d) {
@@ -63,33 +71,31 @@ function dateToDatekey(d) {
     var m =
         d.getMonth() + 1 > 9
             ? d.getMonth() + 1
-            : `0` + (d.getMonth() + 1).toString()
-    var d = d.getDate() > 9 ? d.getDate() : `0` + d.getDate().toString()
-    return parseInt(`${y}${m}${d}`)
+            : '0' + (d.getMonth() + 1).toString()
+    var d = d.getDate() > 9 ? d.getDate() : '0' + d.getDate().toString()
+    return parseInt(y.toString() + m.toString() + d.toString())
 }
 function format(datekey, long, separator) {
     var a = datekey.toString().split('')
-    var y = `${a[0]}${a[1]}${a[2]}${a[3]}`
-    var m = `${a[4]}${a[5]}`
-    var d = `${a[6]}${a[7]}`
+    var y = a[0] + a[1] + a[2] + a[3]
+    var m = a[4] + a[5]
+    var d = a[6] + a[7]
     var s = m + separator + d
     var l = m + separator + d + separator + y
     return long ? l : s
 }
 function validateLength(d) {
     if (d.toString().length !== 8) {
-        throw new Error(`
-            Cannot instantiate DatekeyHelper. Was passed a
-            datekey which is not the right length.
-        `)
+        throw new Error(
+            'Cannot instantiate DatekeyHelper. Was passed a datekey which is not the right length.'
+        )
     }
 }
 function validateType(d) {
     if (typeof d !== 'number') {
-        throw new Error(`
-            Cannot instantiate DatekeyHelper. Was passed a
-            datekey which is not a number.
-        `)
+        throw new Error(
+            'Cannot instantiate DatekeyHelper. Was passed a datekey which is not a number.'
+        )
     }
 }
 
