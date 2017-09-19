@@ -12,7 +12,7 @@ Usage:
 const DatekeyHelper = require('datekey-helper')
 
 const key = 20170918 // typeof === 'number'
-const datekey = new DatekeyHelper(key)
+let datekey = new DatekeyHelper(key)
 
 console.log(datekey.isMonday)
 // => true
@@ -35,7 +35,7 @@ console.log(datekey.weekEndings(-4))
 
 Separator:
 ```
-const datekey2 = new DatekeyHelper(key, { separator: '-' })
+datekey.setSeparator('-') // separator can be any number of string sequence
 
 console.log(datekey.display.long)
 // => 09-18-2017
